@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { UserWarning } from './UserWarning';
 import {
-  USER_ID,
   getTodos,
   addTodo,
   deleteTodo,
   updateTodo,
+  USER_ID,
 } from './api/todos';
 import { Todo } from './types/Todo';
 import { TodoList } from './components/TodoList';
@@ -134,7 +134,7 @@ export const App: React.FC = () => {
         }),
       );
     } catch {
-      showError('Unable to update todos');
+      showError('Unable to update todo');
     } finally {
       setLoadingIds(prev => prev.filter(id => !idsToUpdate.includes(id)));
     }
@@ -206,19 +206,6 @@ export const App: React.FC = () => {
 
   const isAllCompleted =
     todos.length > 0 && todos.every(todo => todo.completed);
-  const hasTodos = todos.length > 0;
-
-  if (!hasTodos) {
-    return (
-      <div className="todoapp">
-        <h1 className="todoapp__title">todos</h1>
-        <div className="todoapp__content">
-          <NewTodo onAdd={handleAddTodo} />
-        </div>
-        <ErrorNotification errorMessage={errorMessage} onClose={hideError} />
-      </div>
-    );
-  }
 
   return (
     <div className="todoapp">
